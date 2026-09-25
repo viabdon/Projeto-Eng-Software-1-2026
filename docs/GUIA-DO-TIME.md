@@ -1,15 +1,15 @@
-# Guia curto para implementar um card
+# Guia de implementação
 
-1. Leia ARQUITETURA.md, CONTRATOS.md e o arquivo `docs/cards/Cxx.md` atribuído a você.
-2. Clone o repositório, abra a pasta e execute `py -3.12 main.py`. Em Linux/macOS, use `python main.py` com Python 3.12. Não há pacotes para instalar.
-3. Crie sua branch a partir de main atualizada: `git switch main`, `git pull --ff-only`, `git switch -c codex/cxx`. Execute cada comando separadamente.
-4. Implemente as funções já declaradas em `cxx.py`, preservando nomes e parâmetros. Implemente sua tela em `tela_cxx.py`; ela já aparece no menu principal.
-5. Execute todos os cenários do seu card, registre resultados e tire os prints. Faça commit apenas dos seus arquivos; abra um PR para main e indique o card e testes executados.
-6. Após revisão e merge, atualize a base de sua próxima branch. Evite mudar menu, fixtures ou contratos por conta própria: leve a mudança necessária a Pablo.
+1. Ler ARQUITETURA.md, CONTRATOS.md e o arquivo `docs/cards/Cxx.md` correspondente ao card atribuído.
+2. Clonar o repositório, abrir a pasta e executar `py -3.12 main.py`. Em Linux/macOS, usar `python main.py` com Python 3.12. Não há pacotes para instalar.
+3. Criar uma branch a partir de main atualizada: `git switch main`, `git pull --ff-only`, `git switch -c codex/cxx`. Executar cada comando separadamente e substituir `xx` pelo número do card, de `01` a `14`.
+4. Implementar as funções declaradas em `cxx.py`, preservando nomes e parâmetros. Implementar a tela correspondente em `tela_cxx.py`, já vinculada ao menu principal.
+5. Executar os cenários do card, registrar resultados e capturar os prints. Incluir no commit apenas os arquivos atribuídos ao card; abrir um PR para main com a identificação do card e dos testes executados.
+6. Após revisão e merge, atualizar a base da próxima branch. Centralizar com Pablo as mudanças necessárias no menu, nas fixtures e nos contratos.
 
-## Os poucos conceitos de dados necessários
+## Acesso aos dados
 
-Um dicionário é um registro com campos nomeados. A lista guarda vários registros:
+O estado reúne listas de registros. Os campos são acessados pelo nome:
 
 ```python
 grupo = {"id": 1, "nome": "Python", "ativo": True}
@@ -21,7 +21,7 @@ for item in grupos:
     print(item["nome"])
 ```
 
-No projeto, use os registros que a base já preparou:
+Para localizar um registro, utilizar o helper da base:
 
 ```python
 from app.base.consulta import buscar_por_id
@@ -31,37 +31,37 @@ if grupo is None:
     return {"ok": False, "mensagem": "Grupo não encontrado.", "dados": None}
 ```
 
-JSON usa `true`, `false` e `null`; depois que o Python carrega o arquivo, eles viram `True`, `False` e `None`. Trabalhe no estado recebido pela função. Recarregar JSON a cada chamada apagaria alterações feitas por outro módulo na mesma sessão.
+Os valores JSON `true`, `false` e `null` são convertidos para `True`, `False` e `None` no carregamento. As funções devem utilizar o estado recebido por parâmetro. Recarregar o JSON a cada chamada apagaria alterações feitas por outro módulo na mesma sessão.
 
-## Separar regra e terminal
+## Separação entre regra e terminal
 
-`cxx.py` valida e altera dados; `tela_cxx.py` usa `input()` e `print()`. Uma tela pode seguir esta forma, adaptando a função e os campos ao card:
+`cxx.py` valida e altera dados; `tela_cxx.py` utiliza `input()` e `print()`. Exemplo de validação de entrada na tela:
 
 ```python
 valor = input("ID do grupo: ")
 try:
     grupo_id = int(valor)
 except ValueError:
-    print("Digite um número inteiro.")
+    print("O ID deve ser um número inteiro.")
     return
 
-# Chamar aqui a função real do seu card.
+# Chamar a função correspondente ao card e apresentar o resultado.
 # resultado = consultar(estado, grupo_id)
 # print(resultado["mensagem"])
 ```
 
-No fim de uma operação, a tela retorna ao menu principal. Se precisar de submenu, use `while`, `if/elif/else` e opção de voltar. Mostre os dados de modo legível, sem despejar dicionários grandes nos prints de avaliação.
+Ao final da operação, a tela retorna ao menu principal. Submenus podem utilizar `while`, `if/elif/else` e uma opção de voltar. Apresentar os dados de forma legível para consulta e registro das evidências.
 
-## Uso dos agentes de IA
+## Apoio de IA (opcional)
 
-Copie e adapte este pedido no seu agente:
+Modelo de instrução para implementação assistida:
 
-> Implemente somente o card Cxx descrito em docs/cards/Cxx.md. Leia antes docs/ARQUITETURA.md e docs/CONTRATOS.md. Edite somente os arquivos atribuídos ao card. Use Python 3.12 e biblioteca padrão, com if/else, for simples e funções pequenas. Preserve assinaturas e campos. Não implemente outros cards, não adicione frameworks, banco, API real ou dependências. Explique os acessos a dicionários usados. Execute os cenários possíveis e relate o que não foi executado; não invente prints, testes aprovados ou funcionalidades. Para mudar um contrato, descreva primeiro o motivo ao responsável pela integração.
+> Implementar somente o card Cxx descrito em docs/cards/Cxx.md, seguindo docs/ARQUITETURA.md e docs/CONTRATOS.md. Editar apenas os arquivos atribuídos ao card. Usar Python 3.12 e biblioteca padrão, com if/else, for simples e funções pequenas. Preservar assinaturas e campos. Manter o escopo definido, sem adicionar frameworks, banco ou APIs reais. Executar os cenários possíveis e registrar limitações da verificação. Não inventar prints ou resultados de testes. Encaminhar propostas de alteração dos contratos ao responsável pela integração.
 
-Verifique o código gerado e tente explicá-lo com suas próprias palavras. Não substituir validações por mensagens de sucesso fixas: dados são fictícios, mas a interação e a regra do card devem funcionar.
+O código gerado deve ser revisado e validado. Dados fictícios não dispensam a implementação das regras: mensagens fixas de sucesso não substituem as operações previstas nos cards.
 
 ## Pull request
 
-Inclua ID do card, comportamento entregue, arquivos alterados, cenários executados e caminhos dos prints. Não afirmar que tudo passou se uma integração depende de outro card. O PR pode ser revisado enquanto a integração final aguarda; Done exige a validação completa.
+Incluir ID do card, comportamento entregue, arquivos alterados, cenários executados e caminhos dos prints. Registrar dependências de integração ainda pendentes. O PR pode ser revisado antes da integração final; Done exige validação completa.
 
-Em conflito de merge, compare a mudança de ambos os lados. Não resolver aceitando uma versão inteira sem entender, nem usar reset destrutivo para apagar trabalho. Arquivos exclusivos por card reduzem essa situação.
+Em conflitos de merge, comparar as mudanças dos dois lados e preservar os comportamentos necessários. Arquivos exclusivos por card reduzem a ocorrência de conflitos.

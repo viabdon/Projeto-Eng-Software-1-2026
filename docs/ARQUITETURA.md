@@ -1,6 +1,6 @@
 # Arquitetura — Comunidade de Estudos
 
-Definida antes do detalhamento das tasks. Fonte: os 14 cards de **Backlog Ready** do [quadro da equipe](https://trello.com/b/I49Fyzvl), consultados em 25/09/2026. O arquivo inicialmente fornecido era HTML; a leitura válida foi feita no quadro autenticado. As etiquetas de atribuição anteriores foram desconsideradas, conforme solicitado.
+Definida antes do detalhamento das tasks. Fonte: os 14 cards de **Backlog Ready** do [quadro da equipe](https://trello.com/b/I49Fyzvl), consultados em 25/09/2026. A distribuição dos cards está definida em PLANEJAMENTO.md.
 
 ## Escolha e limites
 
@@ -14,14 +14,14 @@ O objetivo é planejar e entregar a base para o time implementar os cards. Arqui
 | --- | --- |
 | Usuário autenticado | Seleção de usuário fictício no menu; vínculo e papel continuam sendo validados |
 | Tela, aba ou painel | Opção de menu com listagem legível no terminal |
-| Armazenamento em nuvem (#36) | Cópia real de arquivo para `runtime/nuvem/` e download para `runtime/downloads/`; indicar “nuvem simulada” |
-| IA (#39) | Provedor mock que devolve questões prontas; validar resposta e simular resposta inválida; indicar “IA simulada” |
-| Chat (#38) | Histórico em memória e envio sequencial; trocar usuário para demonstrar conversa; sem tempo real |
-| Notificações (#9) | Caixa de avisos dentro da aplicação, alimentada imediatamente por eventos locais; sem push ou e-mail |
+| Armazenamento em nuvem (C10) | Cópia real de arquivo para `runtime/nuvem/` e download para `runtime/downloads/`; indicar “nuvem simulada” |
+| IA (C14) | Provedor mock que devolve questões prontas; validar resposta e simular resposta inválida; indicar “IA simulada” |
+| Chat (C11) | Histórico em memória e envio sequencial; trocar usuário para demonstrar conversa; sem tempo real |
+| Notificações (C12) | Caixa de avisos dentro da aplicação, alimentada imediatamente por eventos locais; sem push ou e-mail |
 | Permissão do celular | Flag fictícia de bloqueio de notificações e grupo inativo para simular a exceção |
 | Lembretes | Verificação ao abrir a caixa de avisos; sem agendador em segundo plano |
 
-Essas adaptações se apoiam na autorização do usuário para um MVP com dados mockados. Não alegar IA, nuvem, autenticação ou push reais na apresentação. Se a avaliação exigir essas integrações reais, será necessário rever o escopo; elas não estão nesta Sprint.
+O escopo do MVP utiliza dados mockados e simulações locais. Não alegar IA, nuvem, autenticação ou push reais na apresentação. Se a avaliação exigir essas integrações reais, será necessário rever o escopo; elas não estão nesta Sprint.
 
 ## Estrutura e propriedade dos arquivos
 
@@ -36,15 +36,15 @@ app/
     eventos.py                  registrar aviso e destinatários no momento do evento
     relogio.py                  relógio de demonstração
   funcionalidades/
-    grupos/                     Renan: cards 27 e 28
-    descoberta/                 Bernardo: cards 29, 30 e 31
-    participacao/               Alexandre: card 32
-    encontros/                  Alexandre: card 37
-    acompanhamento/             Rafael: cards 9 e 33
-    materiais/                  Enrique: card 36
-    chat/                       Enrique: card 38
-    estudos/                    Pablo: cards 26 e 19
-    simulados/                  Pablo: card 39
+    grupos/                     Renan: cards C01 e C02
+    descoberta/                 Bernardo: cards C03, C04 e C05
+    participacao/               Alexandre: card C06
+    encontros/                  Alexandre: card C09
+    acompanhamento/             Rafael: cards C12 e C13
+    materiais/                  Enrique: card C10
+    chat/                       Enrique: card C11
+    estudos/                    Pablo: cards C07 e C08
+    simulados/                  Pablo: card C14
 dados/                          fixtures compartilhadas e estáveis
 amostras/                       arquivos fictícios de estudo
 docs/
@@ -67,7 +67,7 @@ Em cada pasta funcional, cada card possui `cXX.py` (regras) e `tela_cXX.py` (ent
 `main.py → menu.py → tela_cXX.executar(estado, usuario_id) → cXX.função(...)`.
 
 - Funções de negócio recebem `estado` explicitamente. Não usar estado global nem recarregar JSON dentro da operação.
-- `estado` é um dicionário cujos valores são listas de registros. O guia explica os poucos acessos necessários; não se espera conhecimento prévio de dicionários.
+- `estado` é um dicionário cujos valores são listas de registros. Os campos e exemplos de acesso estão descritos no guia de implementação.
 - Registros são dicionários com campos definidos em `CONTRATOS.md`. Procurar registros com `buscar_por_id` e laços simples.
 - Cada função retorna `{"ok": True/False, "mensagem": "...", "dados": ...}`. A interface imprime mensagem e dados de forma legível. `False` representa uma rejeição esperada, não uma exceção de Python.
 - Primeiro validar todos os dados e permissões; depois alterar o estado. Uma operação recusada não modifica registros, arquivos ou eventos.
@@ -78,8 +78,8 @@ Em cada pasta funcional, cada card possui `cXX.py` (regras) e `tela_cXX.py` (ent
 ## Regras adotadas onde o quadro deixa escolhas abertas
 
 1. O criador entra como monitor do próprio grupo. Os papéis são por grupo, não globais.
-2. O card 27 cria grupo inativo, ainda em configuração. O card 28 valida descrição, modalidade e privacidade e o ativa. Isso concilia os critérios de cadastro do 27 com seu BDD, que descreve configuração e se sobrepõe ao 28.
-3. Modalidades: `online` e `presencial`. Privacidade: `publico` e `privado`. Filtros do 30 usam esses dois campos; não acrescentar localização, reputação ou recomendação.
+2. O card C01 cria grupo inativo, ainda em configuração. O card C02 valida descrição, modalidade e privacidade e o ativa. Isso concilia os critérios de cadastro do C01 com o BDD, que descreve configuração e se sobrepõe ao C02.
+3. Modalidades: `online` e `presencial`. Privacidade: `publico` e `privado`. Filtros do C04 usam esses dois campos; não acrescentar localização, reputação ou recomendação.
 4. Grupo público aceita entrada imediatamente; grupo privado registra pedido pendente. A tela de aprovação não existe nos 14 cards e fica fora da Sprint. Pendentes não ocupam vaga nem recebem conteúdo de participante.
 5. Só monitores publicam materiais e avaliações; membros podem baixar materiais, conversar e criar metas pessoais. Qualquer participante pode marcar encontro e alterar o encontro que criou; outro participante recebe rejeição.
 6. Sair do grupo remove o vínculo, mantendo histórico. Impedir saída do último monitor para evitar grupo sem responsável. A interface oferece confirmação simples antes da saída.
@@ -92,6 +92,6 @@ Essas são decisões do planejamento, não transcrições de requisitos que o Tr
 
 ## Estratégia para evitar conflitos e espera
 
-Congelar esta base antes de criar branches funcionais. Cada pessoa altera somente os arquivos relacionados em seu card e sua pasta de evidências. Fixtures pessoais opcionais ficam em `dados_extras/Cxx/` e não mudam o carregador central; para demonstração integrada, Pablo incorpora os dados necessários nas fixtures comuns.
+Congelar esta base antes de criar branches funcionais. Cada pessoa altera somente os arquivos relacionados no card e na pasta de evidências correspondente. Fixtures pessoais opcionais ficam em `dados_extras/Cxx/` e não mudam o carregador central; para demonstração integrada, Pablo incorpora os dados necessários nas fixtures comuns.
 
-Cards dependentes usam registros prontos durante o desenvolvimento. Um card pode ser desenvolvido em paralelo, mas só vai para Done após testar suas ligações com os produtores reais. Ordem de integração e dependências ficam no planejamento. Os 14 cards continuam rastreáveis por ID e link original, sem criar funcionalidades para inflar a contagem.
+Cards dependentes usam registros prontos durante o desenvolvimento. Um card pode ser desenvolvido em paralelo, mas só vai para Done após testar as ligações com os produtores reais. Ordem de integração e dependências ficam no planejamento. Os 14 cards continuam rastreáveis por ID e link original, sem criar funcionalidades para inflar a contagem.

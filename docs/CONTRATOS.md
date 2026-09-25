@@ -20,21 +20,21 @@ As chaves abaixo são obrigatórias. Valores `None` aparecem como `null` nos JSO
 | --- | --- | --- |
 | usuarios | id, nome | Base fixa |
 | materias | Lista de strings: Python, Matemática | Base fixa |
-| grupos | id, nome, materia, objetivo, limite, criador_id, descricao, modalidade, privacidade, ativo | C27 cria; C28 configura |
-| vinculos | id, grupo_id, usuario_id, papel (`monitor` ou `membro`) | C27 cria fundador; C32 admite; C33 remove vínculo ao sair |
-| solicitacoes | id, grupo_id, usuario_id, status (`pendente` ou `aceita`), criado_em | C32 |
-| atividades | id, grupo_id, criador_id, tipo (`tarefa` ou `meta`), escopo (`pessoal` ou `grupo`), titulo, descricao, objetivo, inicio, prazo | C26 |
-| atribuicoes | id, atividade_id, usuario_id, status (`pendente` ou `concluida`), concluida_em (string ou None) | C26 |
-| avaliacoes | id, atribuicao_id, monitor_id, nota (número 0–10), feedback, criado_em, lida (bool) | C19 |
-| preferencias | id, usuario_id, grupo_id, ativo (bool), tipos (lista de strings) | C09; C33 remove ao sair |
+| grupos | id, nome, materia, objetivo, limite, criador_id, descricao, modalidade, privacidade, ativo | C01 cria; C02 configura |
+| vinculos | id, grupo_id, usuario_id, papel (`monitor` ou `membro`) | C01 cria fundador; C06 admite; C13 remove vínculo ao sair |
+| solicitacoes | id, grupo_id, usuario_id, status (`pendente` ou `aceita`), criado_em | C06 |
+| atividades | id, grupo_id, criador_id, tipo (`tarefa` ou `meta`), escopo (`pessoal` ou `grupo`), titulo, descricao, objetivo, inicio, prazo | C07 |
+| atribuicoes | id, atividade_id, usuario_id, status (`pendente` ou `concluida`), concluida_em (string ou None) | C07 |
+| avaliacoes | id, atribuicao_id, monitor_id, nota (número 0–10), feedback, criado_em, lida (bool) | C08 |
+| preferencias | id, usuario_id, grupo_id, ativo (bool), tipos (lista de strings) | C12; C13 remove ao sair |
 | eventos | id, grupo_id, tipo, texto, destinatarios (lista de IDs), criado_em, chave (string única) | Helper da base, chamado pelos produtores |
-| leituras | id, evento_id, usuario_id | C09 |
-| encontros | id, grupo_id, criador_id, inicio, local | C37 |
-| materiais | id, grupo_id, autor_id, nome, caminho (relativo à pasta da sessão), tamanho (bytes), criado_em | C36 |
-| mensagens | id, grupo_id, autor_id, texto, criado_em | C38 |
-| questoes | id, materia, enunciado, alternativas (lista de textos), correta (`A`, `B` ou `C`) | Fixture do C39 |
-| resposta_ia_invalida | Retorno mock propositalmente sem campos obrigatórios | Fixture do C39 |
-| simulados | id, usuario_id, materia, questoes (cópia validada), respostas (lista de questao_id/alternativa), status (`aberto` ou `entregue`), acertos (None antes da entrega) | C39 |
+| leituras | id, evento_id, usuario_id | C12 |
+| encontros | id, grupo_id, criador_id, inicio, local | C09 |
+| materiais | id, grupo_id, autor_id, nome, caminho (relativo à pasta da sessão), tamanho (bytes), criado_em | C10 |
+| mensagens | id, grupo_id, autor_id, texto, criado_em | C11 |
+| questoes | id, materia, enunciado, alternativas (lista de textos), correta (`A`, `B` ou `C`) | Fixture do C14 |
+| resposta_ia_invalida | Retorno mock propositalmente sem campos obrigatórios | Fixture do C14 |
+| simulados | id, usuario_id, materia, questoes (cópia validada), respostas (lista de questao_id/alternativa), status (`aberto` ou `entregue`), acertos (None antes da entrega) | C14 |
 
 `configuracao` é um objeto com `agora`, `bloqueio_notificacoes` e `chat_indisponivel`. `estado["_runtime"]` é um `pathlib.Path` adicionado pelo carregador e não deve ser serializado.
 
@@ -42,38 +42,38 @@ Mesmo quando dois cards escrevem na mesma coleção, eles editam arquivos Python
 
 ## Saídas de consulta que integram módulos
 
-- `buscar_grupos(estado, materia)` e `filtrar_grupos(grupos_encontrados, modalidade, privacidade)` retornam `dados` como lista de registros de grupos. Filtro recebe exatamente a lista da busca. Não mudar seus registros.
+- `buscar_grupos(estado, materia)` e `filtrar_grupos(grupos_encontrados, modalidade, privacidade)` retornam `dados` como lista de registros de grupos. Filtro recebe exatamente a lista da busca. Não modificar os registros recebidos.
 - `detalhar_grupo(estado, grupo_id)` retorna em `dados`: id, nome, materia, descricao, objetivo, modalidade, privacidade, participantes, limite, vagas. Grupo inativo/inexistente retorna rejeição; lotado retorna detalhes com vagas=0 e mensagem de indisponibilidade para entrada.
 - `obter_painel(estado, usuario_id)` retorna lista de objetos: grupo_id, nome, ativo, tarefas_pendentes (inteiro, inclui metas), avisos_nao_lidos (inteiro), proximo_encontro (registro ou None), materiais_recentes (lista de até três registros). Ordenar os materiais por criado_em decrescente e desempatar por ID decrescente.
-- `listar_atividades` retorna lista de objetos com atividade, atribuicao e nova_avaliacao (bool: existe avaliação não lida dessa atribuição). Um membro vê as próprias atribuições; monitor vê as do grupo. A tela deve deixar claro a quem pertence cada atribuição e indicar novo feedback ao destinatário, orientando abrir a opção 19 para ler.
+- `listar_atividades` retorna lista de objetos com atividade, atribuicao e nova_avaliacao (bool: existe avaliação não lida dessa atribuição). Um membro vê as próprias atribuições; monitor vê as do grupo. A tela deve deixar claro a quem pertence cada atribuição e indicar novo feedback ao destinatário, orientando abrir a opção 08 para ler.
 - `listar_avaliacoes` retorna lista de objetos com avaliacao, atividade e usuario_id. É o histórico do usuário atual, com nota/feedback e indicador de leitura.
 - `listar_avisos` retorna lista de objetos com evento e lido (bool), apenas para destinatário que ainda tenha vínculo. Grupo inativo pode ter histórico, mas não pode habilitar novos avisos.
-- `listar_materiais` e `listar_mensagens` retornam listas de seus registros. Arquivos e mensagens privados exigem vínculo atual.
+- `listar_materiais` e `listar_mensagens` retornam listas dos registros correspondentes. Arquivos e mensagens privados exigem vínculo atual.
 - `baixar_material` retorna `dados={"caminho": str(destino)}` após verificar a cópia; `entregar` retorna o simulado com acertos preenchidos.
 - Outras criações/edições retornam o registro criado/alterado. `concluir_atividade` retorna a atribuição; `sair_grupo` retorna `dados={"grupo_id": grupo_id}`. O retorno não substitui a alteração no estado compartilhado.
 
 ## Eventos, avisos e integração sem espera
 
-O helper `registrar_evento(estado, grupo_id, tipo, texto, destinatarios, chave)` já está disponível. Ele registra o evento imediatamente, ignora repetições da mesma chave e aplica preferências no instante da emissão. O chamador deve validar sua operação e o grupo antes de usá-lo.
+O helper `registrar_evento(estado, grupo_id, tipo, texto, destinatarios, chave)` já está disponível. Ele registra o evento imediatamente, ignora repetições da mesma chave e aplica preferências no instante da emissão. O chamador deve validar a operação e o grupo antes de usá-lo.
 
-Sem preferência cadastrada, considerar todos os quatro tipos habilitados. C09 pode criar preferência explícita para desativar ou escolher tipos. O helper captura IDs elegíveis; alterações posteriores na preferência não reentregam eventos antigos. Leituras ficam em uma coleção separada para não modificar o aviso dos outros.
+Sem preferência cadastrada, considerar todos os quatro tipos habilitados. C12 pode criar preferência explícita para desativar ou escolher tipos. O helper captura IDs elegíveis; alterações posteriores na preferência não reentregam eventos antigos. Leituras ficam em uma coleção separada para não modificar o aviso dos outros.
 
 | Produtor | Tipo | Destinatários | Chave |
 | --- | --- | --- | --- |
-| C26 após criar tarefa ou meta | nova_tarefa | Pessoas atribuídas, ainda participantes | `atividade:<id>` |
-| C36 após copiar material e salvar metadados | novo_material | Todos os membros atuais | `material:<id>` |
-| C37 após alteração efetiva de encontro | alteracao_encontro | Todos os membros atuais | `encontro:<id>:alteracao:<numero>` |
-| C09 ao abrir avisos no dia de encontro futuro | lembrete_encontro | Todos os membros atuais | `lembrete:<id>:<inicio>` |
+| C07 após criar tarefa ou meta | nova_tarefa | Pessoas atribuídas, ainda participantes | `atividade:<id>` |
+| C10 após copiar material e salvar metadados | novo_material | Todos os membros atuais | `material:<id>` |
+| C09 após alteração efetiva de encontro | alteracao_encontro | Todos os membros atuais | `encontro:<id>:alteracao:<numero>` |
+| C12 ao abrir avisos no dia de encontro futuro | lembrete_encontro | Todos os membros atuais | `lembrete:<id>:<inicio>` |
 
-Para C37, obter o número de alteração contando eventos existentes daquele encontro e acrescentando 1. Não emitir quando data/local não mudarem. Não usar só o minuto da alteração como chave, pois duas edições podem ocorrer no mesmo minuto.
+Para C09, obter o número de alteração contando eventos existentes daquele encontro e acrescentando 1. Não emitir quando data/local não mudarem. Não usar só o minuto da alteração como chave, pois duas edições podem ocorrer no mesmo minuto.
 
-Aviso de avaliação é o campo `lida=False` no histórico C19, não um quinto tipo de notificação. C33 lê eventos e leituras existentes; C09 gera os lembretes ao abrir a caixa. Sem push no sistema operacional.
+Aviso de avaliação é o campo `lida=False` no histórico C08, não um quinto tipo de notificação. C13 lê eventos e leituras existentes; C12 gera os lembretes ao abrir a caixa. Sem push no sistema operacional.
 
 ## Arquivos e isolamento da sessão
 
 O carregador cria `runtime/sessao_<identificador>/`, expõe esse diretório em `_runtime` e copia o material inicial para a nuvem simulada. As pastas `nuvem/` e `downloads/` ficam dentro dele. Reiniciar cria outra pasta; não apagar recursivamente diretórios para reiniciar um teste. Todo `runtime/` é ignorado pelo Git.
 
-C36 deve armazenar caminhos relativos à pasta da sessão; só copiar para dentro dela e usar `Path(caminho_origem).name` ao montar o nome do destino. O nome original pode vir de um caminho absoluto informado voluntariamente pelo usuário. Não enviar arquivos privados nos testes: usar `amostras/`.
+C10 deve armazenar caminhos relativos à pasta da sessão; só copiar para dentro dela e usar `Path(caminho_origem).name` ao montar o nome do destino. O nome original pode vir de um caminho absoluto informado voluntariamente pelo usuário. Não enviar arquivos privados nos testes: usar `amostras/`.
 
 ## Fixtures para começar sem esperar outra pessoa
 
@@ -87,7 +87,7 @@ C36 deve armazenar caminhos relativos à pasta da sessão; só copiar para dentr
 | Grupo 2 | Python, presencial, privado, ativo; 1 de 3 vagas ocupadas |
 | Grupo 3 | Matemática, online, público, ativo; lotado, 2 de 2 |
 | Grupo 4 | Inativo, usado para falhas |
-| Grupo 5 | Rascunho pronto para C28 configurar |
+| Grupo 5 | Rascunho pronto para C02 configurar |
 | Atividade 1 / atribuições 1 e 2 | Tarefa futura pendente de Bruno e Ana |
 | Atividade 2 / atribuição 3 | Tarefa concluída por Bruno, ainda não avaliada |
 | Atividade 3 / atribuição 4 | Meta expirada de Bruno, ainda pendente e sem avaliação |

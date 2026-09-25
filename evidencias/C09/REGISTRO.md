@@ -4,11 +4,9 @@ Status: **não executado**. Este arquivo é roteiro, não comprovação de teste
 
 | Cenário | Esperado | Observado | Resultado | Executor | Data | Commit | Print |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| C09-S1 | Evento 1 visível; leitura persistida na sessão, sem duplicação. | — | Não executado | — | — | — | — |
-| C09-S2 | Um novo aviso sobre a tarefa criada; pode marcar lido. | — | Não executado | — | — | — | — |
-| C09-S3 | Apenas um lembrete para o mesmo encontro/horário. | — | Não executado | — | — | — | — |
-| C09-F1 | Motivo exato de cada bloqueio é mostrado; preferência não é ativada. | — | Não executado | — | — | — | — |
-| C09-F2 | Nenhum novo aviso da tarefa para Bruno nas duas situações; avisos antigos preservados. | — | Não executado | — | — | — | — |
-| C09-F3 | Negado porque ela não é destinatária/membro do grupo 1. | — | Não executado | — | — | — | — |
+| C09-S1 | Novo encontro salvo com data/hora/local e criador 2. | — | Não executado | — | — | — | — |
+| C09-S2 | Mesmo ID atualizado; evento alteracao_encontro disponível aos destinatários elegíveis. | — | Não executado | — | — | — | — |
+| C09-F1 | Cada entrada rejeitada sem criar encontro/evento. | — | Não executado | — | — | — | — |
+| C09-F2 | Acesso negado e encontro permanece com horário/local originais. | — | Não executado | — | — | — | — |
 
 Anexar os prints reais também ao card original do Trello; não basta deixar a pasta no GitHub. Usar dados fictícios e evitar credenciais nos prints.

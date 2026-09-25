@@ -1,33 +1,33 @@
-from app.funcionalidades.grupos.tela_c27 import executar as tela_c27
-from app.funcionalidades.grupos.tela_c28 import executar as tela_c28
-from app.funcionalidades.descoberta.tela_c29 import executar as tela_c29
-from app.funcionalidades.descoberta.tela_c30 import executar as tela_c30
-from app.funcionalidades.descoberta.tela_c31 import executar as tela_c31
-from app.funcionalidades.participacao.tela_c32 import executar as tela_c32
-from app.funcionalidades.encontros.tela_c37 import executar as tela_c37
-from app.funcionalidades.acompanhamento.tela_c09 import executar as tela_c09
-from app.funcionalidades.acompanhamento.tela_c33 import executar as tela_c33
-from app.funcionalidades.materiais.tela_c36 import executar as tela_c36
-from app.funcionalidades.chat.tela_c38 import executar as tela_c38
-from app.funcionalidades.estudos.tela_c26 import executar as tela_c26
-from app.funcionalidades.estudos.tela_c19 import executar as tela_c19
-from app.funcionalidades.simulados.tela_c39 import executar as tela_c39
+from app.funcionalidades.grupos.tela_c01 import executar as tela_c01
+from app.funcionalidades.grupos.tela_c02 import executar as tela_c02
+from app.funcionalidades.descoberta.tela_c03 import executar as tela_c03
+from app.funcionalidades.descoberta.tela_c04 import executar as tela_c04
+from app.funcionalidades.descoberta.tela_c05 import executar as tela_c05
+from app.funcionalidades.participacao.tela_c06 import executar as tela_c06
+from app.funcionalidades.encontros.tela_c09 import executar as tela_c09
+from app.funcionalidades.acompanhamento.tela_c12 import executar as tela_c12
+from app.funcionalidades.acompanhamento.tela_c13 import executar as tela_c13
+from app.funcionalidades.materiais.tela_c10 import executar as tela_c10
+from app.funcionalidades.chat.tela_c11 import executar as tela_c11
+from app.funcionalidades.estudos.tela_c07 import executar as tela_c07
+from app.funcionalidades.estudos.tela_c08 import executar as tela_c08
+from app.funcionalidades.simulados.tela_c14 import executar as tela_c14
 
 OPCOES = [
-    ("27", "Criar grupo de estudo", tela_c27),
-    ("28", "Configurar características do grupo", tela_c28),
-    ("29", "Procurar grupos por matéria", tela_c29),
-    ("30", "Filtrar grupos encontrados", tela_c30),
-    ("31", "Visualizar detalhes do grupo", tela_c31),
-    ("32", "Solicitar participação no grupo", tela_c32),
-    ("37", "Marcar e alterar horário de encontro", tela_c37),
-    ("9", "Receber aviso de nova tarefa", tela_c09),
-    ("33", "Acessar painel de grupos", tela_c33),
-    ("36", "Upload e Download de material de estudo", tela_c36),
-    ("38", "Chat do Grupo", tela_c38),
-    ("26", "Definir Tarefas e Metas de Estudo (em um grupo)", tela_c26),
-    ("19", "Receber Avaliação e Feedback de Grupos e Monitores", tela_c19),
-    ("39", "Simulados gerados por IA", tela_c39),
+    ("01", "Criar grupo de estudo", tela_c01),
+    ("02", "Configurar características do grupo", tela_c02),
+    ("03", "Procurar grupos por matéria", tela_c03),
+    ("04", "Filtrar grupos encontrados", tela_c04),
+    ("05", "Visualizar detalhes do grupo", tela_c05),
+    ("06", "Solicitar participação no grupo", tela_c06),
+    ("07", "Definir Tarefas e Metas de Estudo (em um grupo)", tela_c07),
+    ("08", "Receber Avaliação e Feedback de Grupos e Monitores", tela_c08),
+    ("09", "Marcar e alterar horário de encontro", tela_c09),
+    ("10", "Upload e Download de material de estudo", tela_c10),
+    ("11", "Chat do Grupo", tela_c11),
+    ("12", "Receber aviso de nova tarefa", tela_c12),
+    ("13", "Acessar painel de grupos", tela_c13),
+    ("14", "Simulados gerados por IA", tela_c14),
 ]
 
 
@@ -61,6 +61,8 @@ def executar(estado):
             if escolha == "U":
                 usuario_id = escolher_usuario(estado)
                 continue
+            if escolha.isdigit():
+                escolha = escolha.zfill(2)
             encontrada = False
             for codigo, titulo, funcao in OPCOES:
                 if escolha == codigo:

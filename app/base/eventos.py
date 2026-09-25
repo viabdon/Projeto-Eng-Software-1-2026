@@ -1,4 +1,4 @@
-"""Contrato comum dos produtores. Não substitui a caixa de avisos do C09."""
+"""Contrato comum dos produtores. Não substitui a caixa de avisos do C12."""
 from app.base.consulta import proximo_id, buscar_vinculo
 from app.base.relogio import agora
 
