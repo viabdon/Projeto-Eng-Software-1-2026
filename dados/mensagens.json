@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "grupo_id": 1,
+    "autor_id": 1,
+    "texto": "Vamos revisar os laços hoje?",
+    "criado_em": "2026-09-24T10:00"
+  },
+  {
+    "id": 2,
+    "grupo_id": 1,
+    "autor_id": 2,
+    "texto": "Sim, vou trazer exercícios.",
+    "criado_em": "2026-09-24T10:05"
+  }
+]

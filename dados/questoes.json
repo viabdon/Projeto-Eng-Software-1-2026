@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "materia": "Python",
+    "enunciado": "Qual palavra inicia uma função?",
+    "alternativas": [
+      "def",
+      "for",
+      "if"
+    ],
+    "correta": "A"
+  },
+  {
+    "id": 2,
+    "materia": "Python",
+    "enunciado": "Qual estrutura repete ações?",
+    "alternativas": [
+      "return",
+      "for",
+      "import"
+    ],
+    "correta": "B"
+  },
+  {
+    "id": 3,
+    "materia": "Python",
+    "enunciado": "Qual valor representa verdadeiro?",
+    "alternativas": [
+      "None",
+      "False",
+      "True"
+    ],
+    "correta": "C"
+  }
+]

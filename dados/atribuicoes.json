@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "atividade_id": 1,
+    "usuario_id": 2,
+    "status": "pendente",
+    "concluida_em": null
+  },
+  {
+    "id": 2,
+    "atividade_id": 1,
+    "usuario_id": 1,
+    "status": "pendente",
+    "concluida_em": null
+  },
+  {
+    "id": 3,
+    "atividade_id": 2,
+    "usuario_id": 2,
+    "status": "concluida",
+    "concluida_em": "2026-09-24T12:00"
+  },
+  {
+    "id": 4,
+    "atividade_id": 3,
+    "usuario_id": 2,
+    "status": "pendente",
+    "concluida_em": null
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "grupo_id": 1,
+    "criador_id": 1,
+    "tipo": "tarefa",
+    "escopo": "grupo",
+    "titulo": "Praticar laços",
+    "descricao": "Resolver exercícios fictícios",
+    "objetivo": "Praticar conceitos",
+    "inicio": "2026-09-20T10:00",
+    "prazo": "2026-09-27T18:00"
+  },
+  {
+    "id": 2,
+    "grupo_id": 1,
+    "criador_id": 1,
+    "tipo": "tarefa",
+    "escopo": "grupo",
+    "titulo": "Resolver listas",
+    "descricao": "Resolver exercícios fictícios",
+    "objetivo": "Praticar conceitos",
+    "inicio": "2026-09-20T10:00",
+    "prazo": "2026-09-26T18:00"
+  },
+  {
+    "id": 3,
+    "grupo_id": 1,
+    "criador_id": 1,
+    "tipo": "meta",
+    "escopo": "grupo",
+    "titulo": "Revisar funções",
+    "descricao": "Resolver exercícios fictícios",
+    "objetivo": "Praticar conceitos",
+    "inicio": "2026-09-20T10:00",
+    "prazo": "2026-09-24T18:00"
+  }
+]

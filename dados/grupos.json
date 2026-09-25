@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nome": "Python em Comunidade",
+    "materia": "Python",
+    "objetivo": "Praticar programação",
+    "limite": 5,
+    "criador_id": 1,
+    "descricao": "Estudo semanal de Python",
+    "modalidade": "online",
+    "privacidade": "publico",
+    "ativo": true
+  },
+  {
+    "id": 2,
+    "nome": "Python Presencial",
+    "materia": "Python",
+    "objetivo": "Revisar exercícios",
+    "limite": 3,
+    "criador_id": 3,
+    "descricao": "Revisão em sala",
+    "modalidade": "presencial",
+    "privacidade": "privado",
+    "ativo": true
+  },
+  {
+    "id": 3,
+    "nome": "Matemática em Dupla",
+    "materia": "Matemática",
+    "objetivo": "Revisar funções",
+    "limite": 2,
+    "criador_id": 3,
+    "descricao": "Grupo já lotado",
+    "modalidade": "online",
+    "privacidade": "publico",
+    "ativo": true
+  },
+  {
+    "id": 4,
+    "nome": "Python Arquivado",
+    "materia": "Python",
+    "objetivo": "Revisão encerrada",
+    "limite": 3,
+    "criador_id": 1,
+    "descricao": "Grupo inativo",
+    "modalidade": "online",
+    "privacidade": "publico",
+    "ativo": false
+  },
+  {
+    "id": 5,
+    "nome": "Python Rascunho",
+    "materia": "Python",
+    "objetivo": "Revisar listas",
+    "limite": 5,
+    "criador_id": 1,
+    "descricao": "",
+    "modalidade": "",
+    "privacidade": "",
+    "ativo": false
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "grupo_id": 1,
+    "tipo": "nova_tarefa",
+    "texto": "Nova tarefa: Praticar laços",
+    "destinatarios": [
+      1,
+      2
+    ],
+    "criado_em": "2026-09-24T10:00",
+    "chave": "atividade:1"
+  }
+]
