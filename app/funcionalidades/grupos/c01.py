@@ -12,11 +12,12 @@ def criar_grupo(estado, usuario_id, nome, materia, objetivo, limite):
     nome = nome.strip() if isinstance(nome, str) else ""
     materia_informada = materia.strip() if isinstance(materia, str) else ""
     objetivo = objetivo.strip() if isinstance(objetivo, str) else ""
+    erros = []
 
     if not nome:
-        return _resultado(False, "Informe o nome do grupo.")
+        erros.append("nome obrigatório")
     if not objetivo:
-        return _resultado(False, "Informe o objetivo do grupo.")
+        erros.append("objetivo obrigatório")
 
     materia_canonica = None
     for item in estado["materias"]:
@@ -24,10 +25,16 @@ def criar_grupo(estado, usuario_id, nome, materia, objetivo, limite):
             materia_canonica = item.strip()
             break
     if materia_canonica is None:
-        return _resultado(False, "Escolha uma matéria disponível no catálogo.")
+        erros.append("matéria deve estar no catálogo disponível")
 
     if isinstance(limite, bool) or not isinstance(limite, int) or limite <= 0:
-        return _resultado(False, "O limite deve ser um número inteiro positivo.")
+        erros.append("limite deve ser um número inteiro positivo")
+
+    if erros:
+        return _resultado(
+            False,
+            "Grupo não criado. Corrija: " + "; ".join(erros) + ".",
+        )
 
     if buscar_por_id(estado["usuarios"], usuario_id) is None:
         return _resultado(False, "Usuário não encontrado.")
