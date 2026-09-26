@@ -10,7 +10,9 @@ def executar(estado, usuario_id):
         escolha = input("Opção: ").strip()
         if escolha == "0":
             return
-        if escolha != "1":
+        if escolha.isdigit():
+            escolha = escolha.zfill(2)
+        if escolha != "01":
             print("Opção inválida.")
             continue
 
