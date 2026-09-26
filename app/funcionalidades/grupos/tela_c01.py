@@ -16,15 +16,39 @@ def executar(estado, usuario_id):
             print("Opção inválida.")
             continue
 
-        nome = input("Nome do grupo: ")
-        materia = input("Matéria (" + ", ".join(estado["materias"]) + "): ")
-        objetivo = input("Objetivo do grupo: ")
-        valor_limite = input("Limite de participantes (inclui o criador): ").strip()
-        try:
-            limite = int(valor_limite)
-        except ValueError:
+        while True:
+            nome = input("Nome do grupo: ").strip()
+            if nome:
+                break
+            print("Informe o nome do grupo.")
+
+        while True:
+            materia = input("Matéria (" + ", ".join(estado["materias"]) + "): ").strip()
+            materia_valida = False
+            for item in estado["materias"]:
+                if materia.casefold() == item.strip().casefold():
+                    materia = item
+                    materia_valida = True
+                    break
+            if materia_valida:
+                break
+            print("Escolha uma matéria disponível no catálogo.")
+
+        while True:
+            objetivo = input("Objetivo do grupo: ").strip()
+            if objetivo:
+                break
+            print("Informe o objetivo do grupo.")
+
+        while True:
+            valor_limite = input("Limite de participantes (inclui o criador): ").strip()
+            try:
+                limite = int(valor_limite)
+            except ValueError:
+                limite = 0
+            if limite > 0:
+                break
             print("O limite deve ser um número inteiro positivo.")
-            continue
 
         resultado = criar_grupo(estado, usuario_id, nome, materia, objetivo, limite)
         print(resultado["mensagem"])
