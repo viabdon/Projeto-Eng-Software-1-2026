@@ -1,16 +1,18 @@
 # Evidências — C07
 
-Status: **não executado**. Este arquivo é roteiro, não comprovação de teste.
+Status: **parcialmente verificado**. Atualizado a partir da exportação do cartão `Evidências_C07.pdf`, gerada em 29/09/2026. As páginas citadas localizam os comentários e capturas nessa exportação.
 
-| Cenário | Esperado | Observado | Resultado | Executor | Data | Commit | Print |
+| Cenário | Esperado | Observado no PDF | Resultado | Executor | Data | Commit | Print |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| C07-S1 | Atividade vinculada a Bruno/grupo 1, uma atribuição e listagem com prazo. | — | Não executado | — | — | — | — |
-| C07-S2 | Uma atividade, atribuições para Ana e Bruno, prazo visível e evento de aviso. | — | Não executado | — | — | — | — |
-| C07-S3 | Status concluida e concluida_em definidos; atribuição 2 de Ana continua pendente; monitor vê resultado. | — | Não executado | — | — | — | — |
-| C07-F1 | Informa ambos os campos obrigatórios; não cria atividade, atribuição ou evento. | — | Não executado | — | — | — | — |
-| C07-F2 | Data passada rejeitada. | — | Não executado | — | — | — | — |
-| C07-F3 | Prazo anterior ao início rejeitado. | — | Não executado | — | — | — | — |
-| C07-F4 | Período encerrado; status e data de conclusão intactos. | — | Não executado | — | — | — | — |
-| C07-F5 | Ambas negadas por permissão. | — | Não executado | — | — | — | — |
+| C07-S1 | Meta de Bruno vinculada ao grupo 1, uma atribuição e prazo visível na lista. | A captura mostra Bruno criando a meta pessoal “Aprender Dicionários”, uma atribuição para Bruno, prazo e aviso local. Não mostra uma consulta posterior pela listagem. | Parcial — criação confirmada; listagem não comprovada | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, p. 14 |
+| C07-S2 | Uma atividade coletiva, atribuições para Ana e Bruno, prazo e aviso. | Ana cria a tarefa “Desafio!”; a tela mostra Ana e Bruno como destinatários e o aviso. Outra captura mostra Bruno consultando a atividade e o prazo. | Passou | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, pp. 12–13 |
+| C07-S3 | Bruno conclui sua atribuição; a de Ana continua pendente; monitor acompanha o resultado. | A captura mostra Bruno concluindo a atribuição #6 e depois vendo seu status como concluído. O comentário relata que a tarefa de Ana segue pendente; não há captura da consulta de Ana ou do monitor após a conclusão. | Parcial — conclusão de Bruno comprovada; restante relatado no comentário | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, pp. 9–11 |
+| C07-F1 | Título e prazo vazios são apontados; nada é criado. | A tentativa deixa tipo e escopo vazios. O sistema rejeita a operação e aponta esses dois campos; o caso do roteiro (título e prazo vazios) não aparece no PDF. | Parcial — validação de campos obrigatórios demonstrada com outra combinação | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, pp. 8–9 |
+| C07-F2 | Prazo passado rejeitado. | Não encontrei tentativa ou resultado deste cenário no PDF. | Não evidenciado | — | — | — | — |
+| C07-F3 | Prazo anterior ao início rejeitado. | A tentativa informa início `2026-09-30T15:00` e prazo `2026-09-30T14:00`; a tela rejeita a atividade e pede prazo posterior ao início. | Passou | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, pp. 7–8 |
+| C07-F4 | Atribuição expirada não é concluída; status e data permanecem intactos. | O PDF contém o roteiro esperado, mas não mostra uma tentativa após o prazo nem a consulta do estado resultante. | Não evidenciado | — | — | — | — |
+| C07-F5 | Tentativas sem permissão são rejeitadas sem alterar os dados. | Ana tenta criar tarefa em grupo do qual não participa e recebe rejeição. Bruno tenta criar tarefa coletiva sem ser monitor e também recebe rejeição. Não há consulta posterior dos registros para confirmar ausência de alteração. | Parcial — rejeições mostradas; estado após cada tentativa não conferido | Pablo Vinicius Abdon Oliveira | 29/09/2026 | — | `Evidências_C07.pdf`, pp. 5–6 |
 
-Anexar os prints reais também ao card original do Trello; não basta deixar a pasta no GitHub. Usar dados fictícios e evitar credenciais nos prints.
+Os comentários no Trello registram as descrições dos resultados; os resultados parciais e não evidenciados acima indicam o que ainda falta demonstrar com capturas ou consulta posterior. O PDF permanece em Downloads e não foi copiado para este repositório. O campo Commit fica em branco porque a implementação local ainda não foi commitada.
+
+As capturas citadas aparecem nos comentários/anexos do cartão. Para completar o registro, anexar capturas de C07-F2 e C07-F4, repetir C07-F1 com título e prazo vazios e registrar as consultas posteriores necessárias em C07-S1, C07-S3 e C07-F5. Usar dados fictícios e evitar credenciais nos prints.
