@@ -6,7 +6,7 @@ from app.funcionalidades.grupos.c02 import configurar_grupo
 def executar(estado, usuario_id):
     """Coleta as características e apresenta a configuração final."""
     while True:
-        print("\n01 - Configurar grupo | 0 - Voltar")
+        print("\n02 - Configurar grupo | 0 - Voltar")
         escolha = input("Opção: ").strip()
         if escolha == "0":
             return
